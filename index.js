@@ -12,7 +12,7 @@ function createBot() {
         host: 'agalarmclise.falix.gg', 
         port: 25565,
         username: 'Bot_Agalar', 
-        version: '1.21',
+        version: '1.20.1',
         hideErrors: true
     })
 
