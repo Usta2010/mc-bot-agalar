@@ -1,11 +1,4 @@
 const mineflayer = require('mineflayer')
-const http = require('http');
-
-// Render'ın uyumaması için gereken web sunucusu
-http.createServer((req, res) => {
-    res.write("Bot Aktif!");
-    res.end();
-}).listen(10000); // Render genelde 10000 portunu sever
 
 function createBot() {
     const bot = mineflayer.createBot({
@@ -13,19 +6,26 @@ function createBot() {
         port: 27329,
         username: 'Bot_Agalar', 
         version: '1.21.1',
-        auth: 'offline',
-        hideErrors: false
+        auth: 'offline' // Çoğu Falix sunucusu için bu gereklidir
     })
 
-    bot.on('login', () => console.log('✅ Bot sunucuda!'));
-    bot.on('spawn', () => {
-        setInterval(() => {
-            if (bot.entity) {
-                bot.setControlState('jump', true);
-                setTimeout(() => bot.setControlState('jump', false), 500);
-            }
-        }, 15000);
+    bot.on('login', () => {
+        console.log('✅ Bot giriş yaptı!');
     });
-    bot.on('end', () => setTimeout(createBot, 10000));
+
+    bot.on('spawn', () => {
+        console.log('🌍 Bot dünyada doğdu!');
+        // Eğer sunucuda şifre varsa buraya şunu ekle:
+        // bot.chat('/register sifre123 sifre123');
+        // bot.chat('/login sifre123');
+    });
+
+    bot.on('kicked', (reason) => console.log('❌ Atıldı: ' + reason));
+    bot.on('error', (err) => console.log('⚠️ Hata: ' + err));
+    bot.on('end', () => {
+        console.log('🔄 Bağlantı kesildi, 10 saniye sonra tekrar denenecek...');
+        setTimeout(createBot, 10000);
+    });
 }
+
 createBot();
