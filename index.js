@@ -9,8 +9,8 @@ http.createServer((req, res) => {
 
 function createBot() {
     const bot = mineflayer.createBot({
-        host: 'agalarmclise.falix.gg', 
-        port: 24651,
+        host: 'ustamcserver.falix.gg', 
+        port: 27329,
         username: 'Bot_Agalar', 
         version: '1.21.1',
         hideErrors: true
