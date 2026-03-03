@@ -13,7 +13,8 @@ function createBot() {
         port: 27329,
         username: 'Bot_Agalar', 
         version: '1.21.1',
-        hideErrors: true
+        auth: 'offline',
+        hideErrors: false
     })
 
     bot.on('login', () => console.log('✅ Bot sunucuda!'));
